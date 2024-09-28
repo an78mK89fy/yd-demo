@@ -1,0 +1,10 @@
+/* 格式化 */
+
+
+/* element+ */
+.el-card {
+    >* {
+        min-height: calc(100% - var(--el-card-padding) * 2);
+        min-width: calc(100% - var(--el-card-padding) * 2);
+    }
+}
