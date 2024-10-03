@@ -1,0 +1,1 @@
+const { globalShortcut } = require('electron')

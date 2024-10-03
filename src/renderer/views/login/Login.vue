@@ -2,8 +2,8 @@
 const formData = ref({
     email: null, pswd: null, stay: false
 })
-function goMenu() {
-    location.href = '#main'
+function goMain() {
+    ipcWindow.ipcRendererSendOpenWindowMain()
 }
 </script>
 
@@ -21,7 +21,7 @@ function goMenu() {
                 <el-checkbox label="保持登录" v-model="formData.stay"></el-checkbox>
             </el-form-item>
             <el-form-item class="btn">
-                <el-button type="primary" @click="goMenu">登录</el-button>
+                <el-button type="primary" @click="goMain">登录</el-button>
                 <RouterLink to="register"><el-button>注册</el-button></RouterLink>
             </el-form-item>
         </el-form>

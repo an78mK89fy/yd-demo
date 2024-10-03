@@ -1,29 +1,24 @@
-const { Menu, BrowserWindow, } = require('electron')
-import { openSettings } from './menuFunction'
+const { Menu } = require('electron')
 
-const menu = [
-    {
-        label: '◀返回', click() {
-            const wc = BrowserWindow.getFocusedWindow().webContents
-            if (wc.canGoBack()) {
-                wc.goBack()
-            }
-        }
-    },
+import { goBack, lockWindow } from '@/main/utils/menuFunction.js'
+import { openWindowSettings, openWindowUser } from '@/main/windows.js'
+
+export default Menu.buildFromTemplate([
+    { label: '◀返回', click: goBack },
     { label: '刷新', role: 'reload' },
     { label: '|', },
     {
         label: '程序', submenu: [
-            { label: '锁定' },
+            { label: '锁定', click: lockWindow },
             { label: '全屏', role: 'togglefullscreen' },
-            { label: '设置', click: openSettings },
+            { label: '设置', click: openWindowSettings },
             { type: 'separator' },
             { label: '退出', role: 'quit' }
         ]
     },
     {
         label: '账户', submenu: [
-            { label: '管理' },
+            { label: '管理', click: openWindowUser },
             { type: 'separator' },
             { label: '注销' },
         ]
@@ -37,7 +32,4 @@ const menu = [
             { label: '关于' },
         ]
     }
-]
-const menuMainDock = Menu.buildFromTemplate(menu)
-
-export default menuMainDock
+])

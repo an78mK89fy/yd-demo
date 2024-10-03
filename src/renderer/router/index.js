@@ -1,5 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { ipcRendererOnRouter } from '@/renderer/utils/ipcRenderer/ipcRendererOn.js'
 import Lock from '@/renderer/views/Lock.vue'
+import Settings from '@/renderer/views/Settings.vue'
+import User from '@/renderer/views/User.vue'
 import IndexLogin from '@/renderer/views/login/IndexLogin.vue'
 import Login from '@/renderer/views/login/Login.vue'
 import Register from '@/renderer/views/login/Register.vue'
@@ -21,8 +24,13 @@ const router = createRouter({
                 { path: '/dashboard', component: Dashboard },
                 { path: '/menu', component: Menu }
             ]
-        }
+        },
+        { path: '/lock', component: Lock },
+        { path: '/settings', component: Settings },
+        { path: '/user', component: User }
     ]
 })
+
+ipcRendererOnRouter(router)
 
 export default router
