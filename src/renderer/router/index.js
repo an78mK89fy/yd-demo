@@ -31,6 +31,6 @@ const router = createRouter({
     ]
 })
 
-ipcRendererOnRouter(router)
+try { ipcRendererOnRouter(router) } catch { /* 不使用try无法在浏览器调试 */ }
 
 export default router

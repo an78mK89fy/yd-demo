@@ -3,7 +3,7 @@ const formData = ref({
     email: null, pswd: null, stay: false
 })
 function goMain() {
-    ipcWindow.ipcRendererSendOpenWindowMain()
+    ipcSendWindow.openWindowMain()
 }
 </script>
 

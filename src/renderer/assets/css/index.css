@@ -1,1 +1,7 @@
 @import './format.css';
+
+body {
+    div#app {
+        height: calc(100dvh - 16px);
+    }
+}

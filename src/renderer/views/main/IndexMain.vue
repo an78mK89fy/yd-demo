@@ -14,7 +14,7 @@
                 <div class="avatar">
                     <el-avatar>avatar</el-avatar>
                     <span class="name">员工姓名</span>
-                    | 🔔
+                    | <el-button circle >🔔</el-button>
                 </div>
             </el-menu>
         </el-header>
