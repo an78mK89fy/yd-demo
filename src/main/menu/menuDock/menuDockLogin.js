@@ -10,6 +10,8 @@ export default Menu.buildFromTemplate([
     { label: '登录', click: goLogin },
     { label: '注册', click: goRegister },
     { label: '|' },
+    { label: '刷新', role: 'reload' },
+    { label: '|' },
     { label: '设置', click: openWindowSettings },
     {
         label: '帮助', submenu: [
