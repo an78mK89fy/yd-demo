@@ -4,7 +4,7 @@ import { openWindowMain } from '@/main/windows.js'
 import createTray from '@/main/utils/createTray.js';
 import menuTray from '@/main/menu/menuTray.js'
 
-function ipcOnOpenWindowWork(windowLogin) {
+function ipcOnOpenWindowMain(windowLogin) {
     ipcMain.on('ipcWindow:openWindowMain', () => {
         windowLogin.destroy()
         openWindowMain()
@@ -13,5 +13,5 @@ function ipcOnOpenWindowWork(windowLogin) {
 }
 
 export {
-    ipcOnOpenWindowWork
+    ipcOnOpenWindowMain
 }

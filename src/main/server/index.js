@@ -9,20 +9,15 @@ import api from './api'
 // 代码
 const app = express()
 
-app.use(express.static(path.join(
-    (MAIN_WINDOW_VITE_DEV_SERVER_URL ? __dirname : process.resourcesPath),
-    '/web'
-)))
+app.use(express.static(path.join((
+    MAIN_WINDOW_VITE_DEV_SERVER_URL ?
+        __dirname :
+        process.resourcesPath
+), '/static')))
 
 app.use('/api', api)
 
-app.get('/ok', (req, res) => {
-    res.send('ok')
-})
-
 const server = http.createServer(app)
-server.open = function () {
-    this.listen(80)
-}
+server.open = function () { this.listen(80) }
 
 export default server
