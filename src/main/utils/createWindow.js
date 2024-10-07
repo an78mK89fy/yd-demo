@@ -2,7 +2,7 @@ const { BrowserWindow } = require('electron')
 const { join } = require('path');
 const { format } = require('url')
 
-function createWindow(option, menu) {
+function createWindow(option) {
     if (option?.title) {
         for (let window of BrowserWindow.getAllWindows()) {
             if (window.getTitle() === option.title) {
@@ -19,13 +19,14 @@ function createWindow(option, menu) {
             preload: join(__dirname, 'preload.js'),
         },
         parent: option?.modal ? BrowserWindow.getAllWindows()[0] : null,
+        autoHideMenuBar: MAIN_WINDOW_VITE_DEV_SERVER_URL ? !option?.menu : false,
     }
     // 创建窗体
     const window = new BrowserWindow({
         ...optionDefault,
-        ...option
+        ...option,
     })
-    if (menu) window.setMenu(menu)
+    if (option?.menu) window.setMenu(option.menu)
 
     window.once('ready-to-show', function () {
         if (option?.title) window.setTitle(option.title)

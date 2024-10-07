@@ -1,24 +1,43 @@
-const { app } = require('electron');
+const { app, BaseWindow } = require('electron');
 
 import createWindow from "@/main/utils/createWindow.js"
 import menuDockLogin from "@/main/menu/menuDock/menuDockLogin.js";
 import menuDockMain from '@/main/menu/menuDock/menuDockMain.js'
+
+function openWindowWellcome() {
+    const window = createWindow({
+        height: 100,
+        width: 300,
+        frame: false,
+        path: '/wellcome',
+        title: 'Luanch'
+    })
+    window.on('close', e => {
+        e.preventDefault()
+        app.quit()
+    })
+    return window
+}
 
 function openWindowLogin() {
     const window = createWindow({
         height: 500,
         resizable: false,
         title: 'Login',
-    }, menuDockLogin)
-    window.on('close', () => app.quit())
+        menu: menuDockLogin
+    })
+    window.on('close', e => {
+        e.preventDefault()
+        app.quit()
+    })
     return window
 }
 
 function openWindowMain() {
     const window = createWindow({
         path: '/main',
-        title: '业务系统'
-    }, menuDockMain
+        menu: menuDockMain
+    }
     ).on('close', function (event) {
         event.preventDefault()
         this.hide()
@@ -26,16 +45,24 @@ function openWindowMain() {
     return window
 }
 
-const titleWindowLock = '已锁定'
 function openWindowLock() {
-    createWindow({
+    const window = createWindow({
         resizable: false,
         path: '/lock',
-        title: titleWindowLock
-    }).on('close', function (event) {
+        title: '已锁定'
+    })
+    window.on('close', function (event) {
         event.preventDefault()
         this.hide()
     })
+    window.unlock = function () {
+        for (let window of BaseWindow.getAllWindows()) {
+            if (window.title !== menuDockMain().getTitle()) {
+                window.destroy()
+            }
+        }
+    }
+    return window
 }
 
 function openWindowSettings() {
@@ -61,10 +88,10 @@ function openWindowUser() {
 }
 
 export {
+    openWindowWellcome,
     openWindowLogin,
     openWindowMain,
     openWindowLock,
-    titleWindowLock,
     openWindowSettings,
     openWindowUser,
 }

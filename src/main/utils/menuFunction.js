@@ -1,31 +1,30 @@
-const { BrowserWindow } = require('electron')
+const { BaseWindow } = require('electron')
 
-import { ipcNavigate } from '@/main/utils/ipcMain/ipcMainSend.js'
-import { openWindowLock, titleWindowLock } from '@/main/windows.js'
+import ipcMainSend from '@/main/utils/ipcMain/ipcMainSend.js'
+import { openWindowLock } from '@/main/windows.js'
 
 function goLogin() {
-    ipcNavigate.push('/')
+    ipcMainSend.navigate.push('/')
 }
 
 function goRegister() {
-    ipcNavigate.push('/register')
+    ipcMainSend.navigate.push('/register')
 }
 
 function goBack() {
-    const wc = BrowserWindow.getAllWindows()[0].webContents
+    const wc = BaseWindow.getAllWindows()[0].webContents
     if (wc.navigationHistory.canGoBack()) wc.navigationHistory.goBack()
 }
 
 function showWindows() {
-    for (let window of BrowserWindow.getAllWindows()) {
+    for (let window of BaseWindow.getAllWindows()) {
         window.show()
     }
 }
 
 function lockWindow() {
-    openWindowLock()
-    for (let window of BrowserWindow.getAllWindows()) {
-        if (window.title !== titleWindowLock) {
+    for (let window of BaseWindow.getAllWindows()) {
+        if (window.title !== openWindowLock().getTitle()) {
             window.destroy()
         }
     }
@@ -36,5 +35,5 @@ export {
     goRegister,
     goBack,
     showWindows,
-    lockWindow,
+    lockWindow
 }

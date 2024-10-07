@@ -1,11 +1,9 @@
-const { BrowserWindow } = require('electron')
+const { BaseWindow } = require('electron')
 
-const ipcNavigate = {
-    push(path) {
-        BrowserWindow.getFocusedWindow().webContents.send('ipcNavigate:push', path)
+export default {
+    navigate: {
+        push(path) {
+            BaseWindow.getFocusedWindow().webContents.send('ipcNavigate:push', path)
+        }
     }
-}
-
-export {
-    ipcNavigate
 }

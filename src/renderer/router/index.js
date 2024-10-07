@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { ipcRendererOnRouter } from '@/renderer/utils/ipcRenderer/ipcRendererOn.js'
+import Wellcome from '@/renderer/views/Wellcome.vue'
 import Lock from '@/renderer/views/Lock.vue'
 import Settings from '@/renderer/views/Settings.vue'
 import User from '@/renderer/views/User.vue'
@@ -25,9 +26,10 @@ const router = createRouter({
                 { path: '/menu', component: Menu }
             ]
         },
+        { path: '/wellcome', component: Wellcome },
         { path: '/lock', component: Lock },
+        { path: '/user', component: User },
         { path: '/settings', component: Settings },
-        { path: '/user', component: User }
     ]
 })
 

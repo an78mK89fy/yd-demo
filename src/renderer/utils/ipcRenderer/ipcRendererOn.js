@@ -1,5 +1,5 @@
 function ipcRendererOnRouter(router) {
-    ipcOnNavigate.push(path => router.push(path))
+    ipcRendererOn.navigate.push(path => router.push(path))
 }
 
 export {
