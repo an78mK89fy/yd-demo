@@ -2,7 +2,7 @@ const { app, Menu, BaseWindow, dialog } = require('electron');
 
 import server from '@/main/server'
 import ipcMainOn from '@/main/utils/ipcMain/ipcMainOn.js'
-import { openWindowWellcome, openWindowLogin } from '@/main/windows.js';
+import { windowWellcome, windowLogin } from '@/main/windows.js';
 
 if (require('electron-squirrel-startup')) app.quit()
 if (!MAIN_WINDOW_VITE_DEV_SERVER_URL) Menu.setApplicationMenu(null)
@@ -10,11 +10,10 @@ server.open()
 ipcMainOn()
 
 app.whenReady().then(() => {
-  const windowWellcome = openWindowWellcome()
-  windowWellcome.on('ready-to-show', () => {
+  windowWellcome.open().on('ready-to-show', () => {
     setTimeout(() => {
       windowWellcome.destroy()
-      openWindowLogin()
+      windowLogin.open()
     }, 3000)
   })
 

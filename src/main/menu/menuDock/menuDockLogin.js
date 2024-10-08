@@ -4,7 +4,7 @@ import {
     goLogin,
     goRegister
 } from '@/main/utils/menuFunction.js'
-import { openWindowSettings } from '@/main/windows.js'
+import { openWindowSettings } from '@/main/utils/menuFunction.js'
 
 export default Menu.buildFromTemplate([
     { label: '登录', click: goLogin },

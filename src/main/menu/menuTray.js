@@ -8,7 +8,7 @@ import {
 import {
     openWindowSettings,
     openWindowUser
-} from '@/main/windows.js'
+} from '@/main/utils/menuFunction.js'
 
 export default Menu.buildFromTemplate([
     { label: '主界面', click: showWindows },

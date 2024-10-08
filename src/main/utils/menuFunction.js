@@ -1,7 +1,11 @@
 const { BaseWindow } = require('electron')
 
 import ipcMainSend from '@/main/utils/ipcMain/ipcMainSend.js'
-import { openWindowLock } from '@/main/windows.js'
+import {
+    windowLock,
+    windowSettings,
+    windowUser
+} from '@/main/windows.js'
 
 function goLogin() {
     ipcMainSend.navigate.push('/')
@@ -12,8 +16,15 @@ function goRegister() {
 }
 
 function goBack() {
-    const wc = BaseWindow.getAllWindows()[0].webContents
-    if (wc.navigationHistory.canGoBack()) wc.navigationHistory.goBack()
+    const window = BaseWindow.getAllWindows()[0]
+    const title = window.getTitle()
+    const wc = window.webContents
+    if (wc.navigationHistory.canGoBack()) {
+        wc.navigationHistory.goBack()
+        wc.on('page-title-updated', () => {
+            window.setTitle(title)
+        })
+    }
 }
 
 function showWindows() {
@@ -23,11 +34,20 @@ function showWindows() {
 }
 
 function lockWindow() {
+    windowLock.open()
     for (let window of BaseWindow.getAllWindows()) {
-        if (window.title !== openWindowLock().getTitle()) {
+        if (window.title !== windowLock.window.getTitle()) {
             window.destroy()
         }
     }
+}
+
+function openWindowSettings() {
+    windowSettings.open()
+}
+
+function openWindowUser() {
+    windowUser.open
 }
 
 export {
@@ -35,5 +55,7 @@ export {
     goRegister,
     goBack,
     showWindows,
-    lockWindow
+    lockWindow,
+    openWindowSettings,
+    openWindowUser
 }

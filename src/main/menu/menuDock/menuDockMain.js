@@ -1,7 +1,11 @@
 const { Menu } = require('electron')
 
-import { goBack, lockWindow } from '@/main/utils/menuFunction.js'
-import { openWindowSettings, openWindowUser } from '@/main/windows.js'
+import {
+    goBack,
+    lockWindow,
+    openWindowSettings,
+    openWindowUser
+} from '@/main/utils/menuFunction.js'
 
 export default Menu.buildFromTemplate([
     { label: '◀返回', click: goBack },
