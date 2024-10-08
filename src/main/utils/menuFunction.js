@@ -47,7 +47,7 @@ function openWindowSettings() {
 }
 
 function openWindowUser() {
-    windowUser.open
+    windowUser.open()
 }
 
 export {
